@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+          "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<book>
+  <title>MyWord: учебный текстовый редактор</title>
+
+  <chapter>
+    <title>Введение</title>
+    <para>MyWord – это учебный текстовый процессор, разработанный в рамках лабораторных работ для демонстрации принципов работы систем контроля версий и документирования кода. Проект реализован на языке Java и имитирует функциональность Microsoft Word, включая ленточный интерфейс, форматирование текста, работу с изображениями, таблицами, проверку правописания и экспорт в различные форматы.</para>
+    <para>Архитектура приложения построена на модульном принципе. Выделены три основных функциональных блока: ядро редактора (пакет <literal>core</literal>), модуль работы с объектами (пакет <literal>objects</literal>) и модуль управления документами (пакет <literal>lifecycle</literal>). Такое разделение позволяет независимо развивать каждую часть и упрощает тестирование.</para>
+    <para>Ядро редактора включает классы для главного окна (<classname>MainWindow</classname>), области документа (<classname>DocumentArea</classname>), форматирования (<classname>TextFormatter</classname>), управления стилями (<classname>StyleManager</classname>) и проверки орфографии (<classname>SpellChecker</classname>). Эти компоненты обеспечивают базовое редактирование и настройку внешнего вида текста.</para>
+    <para>Модуль объектов отвечает за вставку и редактирование нетекстовых элементов: изображений (<classname>ImageHandler</classname>), таблиц (<classname>TableController</classname>) и работу с диалогом поиска/замены (<classname>SearchReplaceDialog</classname>). Эти классы позволяют обогатить содержимое документа и делают редактор более гибким.</para>
+    <para>Модуль управления документами включает операции ввода-вывода (<classname>FileIO</classname>), предварительный просмотр и печать (<classname>PrintPreview</classname>), а также настройки приложения (<classname>Settings</classname>). Благодаря этому пользователь может сохранять свою работу, экспортировать её в PDF, настраивать интерфейс под свои предпочтения.</para>
+    <para>Проект создан исключительно в образовательных целях и не претендует на полноценную замену офисным пакетам. Однако он демонстрирует ключевые аспекты разработки настольных приложений: объектно-ориентированный дизайн, документирование кода с помощью JavaDoc, использование систем контроля версий и создание технической документации в формате DocBook.</para>
+  </chapter>
+
+  <chapter>
+    <title>Сценарии использования</title>
+
+    <section>
+      <title>Сценарий 1: Создание документа и форматирование текста</title>
+      <para>Пользователь запускает приложение, создаёт новый документ и вводит текст. Затем выделяет заголовок и применяет стиль "Заголовок 1", устанавливает жирное начертание и центрирование. Далее вводит основной текст и проверяет орфографию.</para>
+      <para>Пример кода, иллюстрирующий этот сценарий:</para>
+      <programlisting language="java"><![CDATA[
+    // Инициализация главного окна
+    MainWindow window = new MainWindow();
+    window.initialize();
+    window.show();
+
+    // Создание документа и ввод текста
+    DocumentArea doc = new DocumentArea();
+    doc.insertText("Введение\nЭто пример текста для демонстрации возможностей MyWord.");
+
+    // Применение стиля и форматирование
+    StyleManager styles = new StyleManager();
+    styles.applyStyle("Заголовок 1");
+
+    TextFormatter fmt = new TextFormatter();
+    fmt.setBold(true);
+    fmt.setAlignment("center");
+
+    // Проверка орфографии
+    SpellChecker speller = new SpellChecker();
+    speller.checkWord("текста"); // слово верное
+    speller.checkWord("програма"); // слово с ошибкой
+    String[] suggestions = speller.suggestCorrections("програма");
+    System.out.println("Варианты исправления: " + Arrays.toString(suggestions));
+    ]]></programlisting>
+    </section>
+
+    <section>
+      <title>Сценарий 2: Вставка изображения и его масштабирование</title>
+      <para>Пользователь вставляет изображение с диска и изменяет его размер до 400x300 пикселей, после чего настраивает обтекание текстом. В текущей реализации обтекание может быть добавлено в будущем.</para>
+      <programlisting language="java"><![CDATA[
+    ImageHandler img = new ImageHandler();
+    img.insertImage("C:/Users/User/Pictures/diagram.png");
+    img.resize(400, 300);
+    // В перспективе можно установить обтекание:
+    // img.setWrapping("square");
+    ]]></programlisting>
+    </section>
+
+    <section>
+      <title>Сценарий 3: Поиск и замена текста с последующей печатью</title>
+      <para>Пользователь ищет слово "пример" в документе и заменяет его на "образец". Затем открывает предварительный просмотр и отправляет документ на печать.</para>
+      <programlisting language="java"><![CDATA[
+    SearchReplaceDialog sr = new SearchReplaceDialog();
+    sr.search("пример", false); // поиск без учёта регистра
+    sr.replace("пример", "образец");
+
+    PrintPreview preview = new PrintPreview();
+    preview.showPreview();
+    preview.print("HP LaserJet", 2); // печать двух копий
+
+    // Сохранение документа
+    FileIO fileIO = new FileIO();
+    fileIO.save("document.myword", doc.getText());
+    ]]></programlisting>
+    </section>
+
+  </chapter>
+
+  <chapter>
+    <title>Заключение</title>
+    <para>MyWord демонстрирует, как современные текстовые процессоры могут быть построены на модульной архитектуре с чётким разделением ответственности. Проект открыт для расширения и может служить основой для курсовых работ по программированию. Документирование кода с помощью JavaDoc и создание технической документации в формате DocBook позволяет поддерживать высокое качество разработки и облегчает вхождение новых участников в проект.</para>
+    <para>Все исходные тексты, JavaDoc-документация и данный DocBook-файл доступны в репозитории проекта на GitHub.</para>
+  </chapter>
+
+</book>

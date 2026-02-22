@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"lifecycle","l":"FileIO"},{"p":"objects","l":"ImageHandler"},{"p":"lifecycle","l":"PrintPreview"},{"p":"objects","l":"SearchReplaceDialog"},{"p":"lifecycle","l":"Settings"},{"p":"objects","l":"TableController"}];updateSearchResults();

@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+header {
+    background: linear-gradient(135deg, #2b3e4f, #1e2a36);
+    color: white;
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+header h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 300;
+}
+
+header p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.btn {
+    display: inline-block;
+    background: #ff7e5f;
+    color: white;
+    padding: 0.8rem 2rem;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: background 0.3s;
+    font-weight: 500;
+}
+
+.btn:hover {
+    background: #e06649;
+}
+
+section {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #2b3e4f;
+    border-bottom: 3px solid #ff7e5f;
+    display: inline-block;
+    padding-bottom: 0.3rem;
+}
+
+.about p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.modules .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    color: #ff7e5f;
+    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
+}
+
+.card p {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.screenshots .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 2rem 0;
+    justify-content: center;
+}
+
+.screenshots img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 300px;
+    transition: transform 0.2s;
+}
+
+.screenshots img:hover {
+    transform: scale(1.02);
+}
+
+.note {
+    font-style: italic;
+    color: #777;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+footer {
+    background: #1e2a36;
+    color: #ccc;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+}
+
+footer a {
+    color: #ff7e5f;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    header h1 { font-size: 2.2rem; }
+    .btn { padding: 0.6rem 1.5rem; }
+    section { padding: 0 1rem; }
+}
